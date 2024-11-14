@@ -182,6 +182,64 @@
             color: white;
         }
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+        .close-btn {
+            color: #aaa;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .modal-footer button {
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        .save-btn {
+            background-color: #67b168;
+            color: white;
+        }
+        .cancel-btn {
+            background-color: #d9534f;
+            color: white;
+        }
+
         /* Footer */
         footer {
             display: flex;
@@ -209,6 +267,28 @@
         .spacer {
             height: 2rem;
         }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table th,
+        .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            min-width: 100px; /* Ensures minimum width */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+
     </style>
 </head>
 
@@ -284,6 +364,36 @@
         </div>
     </div>
 
+<!-- Add/Edit Artikel Modal -->
+<div id="addArtikelModal" class="modal">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h2 id="modal-title">Add Artikel</h2>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body">
+            <!-- Judul Field -->
+            <div class="form-group">
+                <span id="judulText" style="display: block; font-weight: bold; margin-bottom: 5px;">Judul</span> <!-- Static text above input -->
+                <input type="text" id="judul" placeholder="Enter Judul">
+            </div>
+            <!-- Status Field -->
+            <div class="form-group">
+                <span id="statusText" style="display: block; font-weight: bold; margin-bottom: 5px;">Status</span> <!-- Static text above input -->
+                <input type="text" id="status" placeholder="Enter Status">
+            </div>
+        </div>
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            <button class="save-btn" onclick="saveArtikel()">Save</button>
+        </div>
+    </div>
+</div>
+
+
     <!-- Footer Section -->
     <footer id="kontak">
         <div class="footer-logo">
@@ -351,6 +461,79 @@
                     link.classList.remove('active');
                 }
             });
+        }
+
+let currentEditRow = null;
+
+        function addArtikel() {
+            document.getElementById("modal-title").textContent = "Add Artikel";
+            document.getElementById("judul").value = '';
+            document.getElementById("status").value = '';
+            currentEditRow = null;
+            document.getElementById("addArtikelModal").style.display = "block";
+        }
+
+        function editArtikel(button) {
+            document.getElementById("modal-title").textContent = "Edit Artikel";
+            const row = button.parentNode.parentNode;
+            currentEditRow = row;
+
+            document.getElementById("judul").value = row.cells[1].innerText;
+            document.getElementById("status").value = row.cells[2].innerText;
+            document.getElementById("addArtikelModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("addArtikelModal").style.display = "none";
+        }
+
+        function saveArtikel() {
+            const judul = document.getElementById("judul").value;
+            const status = document.getElementById("status").value;
+
+            if (judul && status) {
+                if (currentEditRow) {
+                    currentEditRow.cells[1].innerText = judul;
+                    currentEditRow.cells[2].innerText = status;
+                } else {
+                    const table = document.querySelector(".table tbody") || document.createElement('tbody');
+                    if (!table.parentNode) document.querySelector(".table").appendChild(table);
+
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${table.rows.length + 1}</td>
+                        <td>${judul}</td>
+                        <td>${status}</td>
+                        <td class="action-buttons">
+                            <button onclick="editArtikel(this)">Edit</button>
+                            <button class="delete-btn" onclick="deleteArtikel(this)">Delete</button>
+                        </td>
+                    `;
+
+                    table.appendChild(row);
+                }
+
+                closeModal();
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        function deleteArtikel(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+
+            document.querySelectorAll(".table tbody tr").forEach((row, index) => {
+                row.cells[0].innerText = index + 1;
+            });
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("addArtikelModal");
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
