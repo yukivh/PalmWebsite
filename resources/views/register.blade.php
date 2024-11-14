@@ -175,25 +175,18 @@ input[type="password"] {
          margin-bottom: 5px; /* Add space between the input fields */
 }
 
-        /* Footer Styling */
+        /* Footer */
         footer {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            justify-content: space-around;
+            align-items: start;
             background-color: #012522;
             color: white;
             padding: 2rem 5%;
-            width: 100%;
-            margin-top: auto; /* Push footer to bottom */
-            flex-wrap: wrap;
         }
 
         .footer-logo img {
             width: 100px;
-        }
-
-        .footer-links, .footer-contact {
-            margin: 1rem 0;
         }
 
         .footer-links h3, .footer-contact h3 {
@@ -205,10 +198,6 @@ input[type="password"] {
             text-decoration: none;
             margin-bottom: 0.5rem;
             display: block;
-        }
-
-        .footer-links a:hover, .footer-contact p:hover {
-            color: #4CAF50;
         }
     </style>
     <script>
