@@ -13,6 +13,10 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        html {
+        scroll-behavior: smooth;
+        }
+
         /* Top Navigation Bar */
         header {
             width: 100%;
@@ -270,8 +274,8 @@
         <div class="logo">Palm On</div>
         <nav>
             <a href="{{ route('home') }}#home">Beranda</a>
-            <a href="{{ route('artikel') }}">Artikel</a>
-            <a href="{{ url("#") }}">Kontak</a>
+            <a href="{{ route('artikel')}}#artikel">Artikel</a>
+            <a href="#kontak">Kontak</a>
         </nav>
         <a href="{{ route('login')}}">
         <button class="login-btn">Login</button>
@@ -304,7 +308,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section id="features" class="features">
         <h2 id="apa">Feature</h2>
             <!-- Spacer -->
         <div class="spacer"></div>
@@ -334,7 +338,7 @@
         <div class="article-content">
             <h2>Kamu Pakar Ahli?</h2>
             <p>Kamu Bisa Publish Artikel Di sini nih !!</p>
-            <a href="{{ url("#") }}" class="btn">Lihat Cara</a>
+            <a href="{{ route('howartikel') }}#cara" class="btn">Lihat Cara</a>
         </div>
     </section>
 
@@ -342,7 +346,7 @@
     <div class="spacer"></div>
 
     <!-- Footer Section -->
-    <footer>
+    <footer id="kontak">
         <div class="footer-logo">
             <img src="{{ asset("/assets/Group 5 2.png") }}" alt="Palm On Logo">
         </div>
@@ -350,7 +354,7 @@
             <h3>Quick Links</h3>
             <a href="{{ route('home') }}#home">Beranda</a>
             <a href="{{ route('artikel') }}#artikel">Artikel</a>
-            <a href="{{ route('') }}#">Feature</a>
+            <a href="#features">Feature</a>
         </div>
         <div class="footer-contact">
             <h3>Hubungi Kami</h3>

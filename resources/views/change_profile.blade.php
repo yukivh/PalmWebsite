@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informasi Akun</title>
@@ -10,7 +11,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+        scroll-behavior: smooth;
         }
 
         /* Top Navigation Bar */
@@ -109,20 +114,18 @@
             margin-top: 15px;
         }
 
-        /* Footer */
-        footer {
+                /* Footer */
+                footer {
             display: flex;
             justify-content: space-around;
             align-items: start;
             background-color: #012522;
             color: white;
             padding: 2rem 5%;
-            margin-top: auto;
         }
 
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+        .footer-logo img {
+            width: 100px;
         }
 
         .footer-links h3, .footer-contact h3 {
@@ -135,6 +138,10 @@
             margin-bottom: 0.5rem;
             display: block;
         }
+
+        .spacer {
+            height: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -142,10 +149,11 @@
         <div class="logo">Palm On</div>
         <nav>
             <a href="{{ route('home') }}#home">Beranda</a>
-            <a href="{{ route('artikel') }}">Artikel</a>
-            <a href="{{ url("#") }}">Kontak</a>
+            <a href="{{ route('artikel')}}#artikel">Artikel</a>
+            <a href="#kontak">Kontak</a>
         </nav>
-        <img id="profile" src="{{ asset("/assets/Group 5 2.png") }}" alt="User Avatar" style="width: 30px; vertical-align: middle; border-radius: 50%;">
+        <a>
+        <img id="profile"src="{{ asset("/assets/Group 5 2.png") }}" alt="User Avatar" style="width: 30px; vertical-align: middle; border-radius: 50%;">
         </a>
     </header>
 
@@ -195,15 +203,15 @@
     </div>
 
     <!-- Footer Section -->
-    <footer>
+    <footer id="kontak">
         <div class="footer-logo">
             <img src="{{ asset("/assets/Group 5 2.png") }}" alt="Palm On Logo">
         </div>
         <div class="footer-links">
             <h3>Quick Links</h3>
-            <a href="{{ url("#home") }}">Beranda</a>
-            <a href="{{ url("#features") }}">Artikel</a>
-            <a href="{{ url("#features") }}">Feature</a>
+            <a href="{{ route('home') }}#home">Beranda</a>
+            <a href="{{ route('artikel') }}#artikel">Artikel</a>
+            <a href="{{ route('features') }}#features">Feature</a>
         </div>
         <div class="footer-contact">
             <h3>Hubungi Kami</h3>
