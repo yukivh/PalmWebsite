@@ -1,102 +1,53 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Informasi Akun</title>
 
     <style>
-
         /* Reset */
-
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
             font-family: 'Poppins', sans-serif;
-
         }
-
         html {
-        scroll-behavior: smooth;
+            scroll-behavior: smooth;
         }
-
-
 
         /* Top Navigation Bar */
-
         header {
-
             width: 100%;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             background-color: #C5E88C;
-
             padding: 1rem 5%;
-
-            box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
             z-index: 1000;
-
         }
-
-
-
         header .logo {
-
             font-size: 1.5rem;
-
             font-weight: bold;
-
         }
-
-
-
         header nav a {
-
             margin: 0 1rem;
-
             text-decoration: none;
-
             color: #333;
-
         }
-
-
-
         .login-btn {
-
             padding: 0.7rem 2rem;
-
             background-color: white;
-
             border: 1px solid #ddd;
-
             border-radius: 5px;
-
             cursor: pointer;
-
         }
-
-
 
         /* Main Layout */
-
         .container {
             display: flex;
             padding-top: 50px;
@@ -104,289 +55,135 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
-
-
         .content {
-
             display: flex;
-
             flex: 1;
-
             padding: 20px;
-
         }
-
-
 
         /* Sidebar */
-
         .sidebar {
-
             width: 25%;
-
             max-width: 250px;
-
             background-color: #fff;
-
             padding: 20px;
-
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
             border-radius: 15px;
-
         }
-
-
-
         .sidebar .profile-icon {
-
             width: 80px;
-
             height: 80px;
-
             border-radius: 50%;
-
             background-color: #C5E88C;
-
             margin: 0 auto;
-
         }
-
-
-
         .sidebar nav {
-
             margin-top: 20px;
-
             text-align: center;
-
         }
-
-
-
         .sidebar nav a {
-
             display: block;
-
             margin: 10px 0;
-
             color: #333;
-
             text-decoration: none;
-
             font-weight: bold;
-
         }
-
-
-
         .sidebar nav a.active {
-
             color: #67b168;
-
             text-decoration: underline;
-
         }
-
-
 
         /* Content Area */
-
         .content-area {
-
             flex: 1;
-
             margin-left: 20px;
-
             background-color: #fff;
-
             padding: 20px;
-
             border-radius: 15px;
-
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
         }
-
-
-
         .content-area h2 {
-
             margin-bottom: 20px;
-
         }
-
-
-
         .content-area .form-group {
-
             margin-bottom: 15px;
-
         }
-
-
-
         .content-area .form-group label {
-
             display: block;
-
             font-weight: bold;
-
             margin-bottom: 5px;
-
         }
-
-
-
         .content-area .form-group input {
-
             width: 100%;
-
             padding: 10px;
-
             border: 1px solid #ccc;
-
             border-radius: 5px;
-
         }
-
-
-
         .content-area .edit-profile-btn {
-
             display: inline-block;
-
             padding: 10px 20px;
-
             background-color: #67b168;
-
             color: white;
-
             border: none;
-
             border-radius: 5px;
-
             cursor: pointer;
-
             margin-top: 20px;
-
         }
-
-
 
         .table {
-
             width: 100%;
-
             border-collapse: collapse;
-
             margin-top: 20px;
-
         }
-
-
-
-        .table th, .table td {
-
+        .table th,
+        .table td {
             border: 1px solid #ddd;
-
             padding: 8px;
-
             text-align: left;
-
         }
-
-
-
         .table th {
-
             background-color: #f2f2f2;
-
         }
-
-
 
         .action-buttons {
-
             display: flex;
-
             gap: 10px;
-
         }
-
-
 
         .action-buttons button {
-
             padding: 5px 10px;
-
             background-color: #67b168;
-
             color: white;
-
             border: none;
-
             border-radius: 5px;
-
             cursor: pointer;
-
         }
-
-
 
         .action-buttons .delete-btn {
-
             background-color: #d9534f;
-
         }
-
-
 
         .pagination {
-
             display: flex;
-
             justify-content: flex-end;
-
             align-items: center;
-
             margin-top: 20px;
-
         }
-
-
-
         .pagination a {
-
             padding: 5px 10px;
-
             margin: 0 3px;
-
             text-decoration: none;
-
             color: #333;
-
             background-color: #e0f3e0;
-
             border-radius: 5px;
-
         }
-
-
-
         .pagination a.active {
-
             background-color: #67b168;
-
             color: white;
-
         }
 
-
-
-                /* Footer */
-                footer {
+        /* Footer */
+        footer {
             display: flex;
             justify-content: space-around;
             align-items: start;
@@ -394,16 +191,15 @@
             color: white;
             padding: 2rem 5%;
         }
-
         .footer-logo img {
             width: 100px;
         }
-
-        .footer-links h3, .footer-contact h3 {
+        .footer-links h3,
+        .footer-contact h3 {
             margin-bottom: 1rem;
         }
-
-        .footer-links a, .footer-contact p {
+        .footer-links a,
+        .footer-contact p {
             color: #ccc;
             text-decoration: none;
             margin-bottom: 0.5rem;
@@ -413,9 +209,9 @@
         .spacer {
             height: 2rem;
         }
-
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo">Palm On</div>
@@ -437,6 +233,7 @@
                     <a href="{{ url("#") }}" onclick="showMyArtikel()" id="artikel-link">My Artikel</a>
                 </nav>
             </aside>
+
             <div class="content-area" id="profile-section">
                 <h2>Informasi Akun - Profile</h2>
                 <div class="form-group">
@@ -453,8 +250,12 @@
                 </div>
                 <button class="edit-profile-btn">Edit Profile</button>
             </div>
+
             <div class="content-area" id="artikel-section" style="display: none;">
-                <h2>Informasi Akun - My Artikel</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Informasi Akun - My Artikel</h2>
+                    <button class="edit-profile-btn" onclick="addArtikel()">Add Artikel</button>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -464,32 +265,24 @@
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Cara Menanam Sawit</td>
-                            <td>Published</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button>Edit</button>
-                                    <button class="delete-btn">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
                 </table>
-                <div class="pagination">
-                    <a href="{{ url("#") }}">1</a>
-                    <a href="{{ url("#") }}">2</a>
-                    <a href="{{ url("#") }}" class="active">...</a>
-                    <a href="{{ url("#") }}">&gt;</a>
-                    <a href="{{ url("#") }}">+</a>
+                <div class="pagination" id="pagination">
+                    <a href="#" class="page-number" onclick="changePage(1)">1</a>
+                    <a href="#" class="page-number" onclick="changePage(2)">2</a>
+                    <a href="#" class="page-number" onclick="changePage(3)">3</a>
+                    <a href="#" class="page-number" onclick="changePage(4)">4</a>
+                    <a href="#" class="page-number" onclick="changePage(5)">5</a>
+                    <a href="#" class="page-number" onclick="changePage(6)">6</a>
+                    <a href="#" class="page-number" onclick="changePage(7)">7</a>
+                    <a href="#" class="page-number" onclick="changePage(8)">8</a>
+                    <a href="#" class="page-number" onclick="changePage(9)">9</a>
+                    <a href="#" class="page-number" onclick="changePage(10)">10</a>
+                    <a href="#" class="pagination-arrow" onclick="previousPage()"><</a>
+                    <a href="#" class="pagination-arrow" onclick="nextPage()">></a>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Footer Section -->
 
     <!-- Footer Section -->
     <footer id="kontak">
@@ -508,20 +301,9 @@
             <p>palmon@email.com</p>
         </div>
     </footer>
+
     <script>
-        function showProfile() {
-            document.getElementById('profile-section').style.display = 'block';
-            document.getElementById('artikel-section').style.display = 'none';
-            document.getElementById('profile-link').classList.add('active');
-            document.getElementById('artikel-link').classList.remove('active');
-        }
-
-        function showMyArtikel() {
-            document.getElementById('profile-section').style.display = 'none';
-            document.getElementById('artikel-section').style.display = 'block';
-            document.getElementById('profile-link').classList.remove('active');
-            document.getElementById('artikel-link').classList.add('active');
-        }
+        let currentPage = 1;
 
         function showProfile() {
             document.getElementById('profile-section').style.display = 'block';
@@ -535,6 +317,40 @@
             document.getElementById('artikel-section').style.display = 'block';
             document.getElementById('profile-link').classList.remove('active');
             document.getElementById('artikel-link').classList.add('active');
+        }
+
+        function addArtikel() {
+            alert("Add Artikel functionality is yet to be implemented.");
+        }
+
+        function changePage(pageNumber) {
+            currentPage = pageNumber;
+            updatePagination();
+        }
+
+        function nextPage() {
+            if (currentPage < 10) {
+                currentPage++;
+                updatePagination();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePagination();
+            }
+        }
+
+        function updatePagination() {
+            let pageLinks = document.querySelectorAll('.page-number');
+            pageLinks.forEach(link => {
+                if (parseInt(link.innerText) === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
         }
     </script>
 </body>

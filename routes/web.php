@@ -47,3 +47,5 @@ Route::get('/register', function () {
 Route::get('/howartikel', function () {
     return view('howartikel');
 })->name('howartikel');
+
+
