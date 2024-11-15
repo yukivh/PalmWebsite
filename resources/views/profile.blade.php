@@ -371,52 +371,54 @@
                     <h2>Informasi Akun - My Artikel</h2>
                     <button class="edit-profile-btn" onclick="addArtikel()">Add Artikel</button>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Judul</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="artikel-table-body">
-                        <!-- Rows will be added dynamically -->
-                    </tbody>
-                </table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody id="artikel-table-body">
+        <!-- Rows will be added dynamically -->
+    </tbody>
+</table>
+
                 <div class="pagination" id="pagination"></div>
             </div>
         </div>
     </div>
 
     <!-- Add/Edit Artikel Modal -->
-    <div id="addArtikelModal" class="modal">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h2 id="modal-title">Add Artikel</h2>
-                <span class="close-btn" onclick="closeModal()">&times;</span>
+<div id="addArtikelModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modal-title">Add Artikel</h2>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <span style="font-weight: bold;">Judul</span>
+                <input type="text" id="judul" placeholder="Enter Judul">
             </div>
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <!-- Judul Field -->
-                <div class="form-group">
-                    <span id="judulText" style="display: block; font-weight: bold; margin-bottom: 5px;">Judul</span> <!-- Static text above input -->
-                    <input type="text" id="judul" placeholder="Enter Judul">
-                </div>
-                <!-- Status Field -->
-                <div class="form-group">
-                    <span id="statusText" style="display: block; font-weight: bold; margin-bottom: 5px;">Status</span> <!-- Static text above input -->
-                    <input type="text" id="status" placeholder="Enter Status">
-                </div>
+            <div class="form-group">
+                <span style="font-weight: bold;">Isi</span>
+                <input type="text" id="status" placeholder="Enter Status">
             </div>
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-                <button class="save-btn" onclick="saveArtikel()">Save</button>
+            <!-- Image Field (Optional) -->
+            <div class="form-group">
+                <span style="font-weight: bold;">Gambar (Optional)</span>
+                <input type="file" id="gambar">
             </div>
         </div>
+        <div class="modal-footer">
+            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            <button class="save-btn" onclick="saveArtikel()">Save</button>
+        </div>
     </div>
+</div>
+
 
     <!-- Footer Section -->
     <footer id="kontak">
@@ -436,141 +438,211 @@
         </div>
     </footer>
 
-    <script>
-        let currentPage = 1;
-        const totalPages = 10; // Max 10 pages
+<script>
+    let currentPage = 1;
+    const totalPages = 10; // Max 10 pages
+    let currentEditRow = null; // To keep track of the row being edited
 
-        function showProfile() {
-            document.getElementById('profile-section').style.display = 'block';
-            document.getElementById('artikel-section').style.display = 'none';
-            document.getElementById('profile-link').classList.add('active');
-            document.getElementById('artikel-link').classList.remove('active');
+    // Show Profile and My Artikel sections
+    function showProfile() {
+        document.getElementById('profile-section').style.display = 'block';
+        document.getElementById('artikel-section').style.display = 'none';
+        document.getElementById('profile-link').classList.add('active');
+        document.getElementById('artikel-link').classList.remove('active');
+    }
+
+    function showMyArtikel() {
+        document.getElementById('profile-section').style.display = 'none';
+        document.getElementById('artikel-section').style.display = 'block';
+        document.getElementById('profile-link').classList.remove('active');
+        document.getElementById('artikel-link').classList.add('active');
+        updatePagination();
+    }
+
+    // Add Artikel functionality
+    function addArtikel() {
+        // Show modal with blank fields for adding artikel
+        document.getElementById("addArtikelModal").style.display = "block";
+        document.getElementById("modal-title").textContent = "Add Artikel";
+
+        // Clear form fields for new input
+        document.getElementById("judul").value = '';
+        document.getElementById("status").value = 'published';  // Set default status to "published"
+        document.getElementById("isi").value = '';  // Clear Isi input field
+        document.getElementById("gambar").value = '';  // Clear Gambar input field
+    }
+
+    // Handle pagination
+    function updatePagination() {
+        const paginationContainer = document.getElementById('pagination');
+        paginationContainer.innerHTML = '';
+
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(totalPages, currentPage + 1);
+
+        if (endPage - startPage < 2) {
+            startPage = Math.max(1, endPage - 2);
         }
 
-        function showMyArtikel() {
-            document.getElementById('profile-section').style.display = 'none';
-            document.getElementById('artikel-section').style.display = 'block';
-            document.getElementById('profile-link').classList.remove('active');
-            document.getElementById('artikel-link').classList.add('active');
+        if (currentPage > 1) {
+            paginationContainer.innerHTML += `<a href="#" class="pagination-arrow" onclick="previousPage()"><</a>`;
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            paginationContainer.innerHTML += `<a href="#" class="page-number" onclick="changePage(${i})">${i}</a>`;
+        }
+
+        if (currentPage < totalPages) {
+            paginationContainer.innerHTML += `<a href="#" class="pagination-arrow" onclick="nextPage()">></a>`;
+        }
+    }
+
+    function changePage(pageNumber) {
+        currentPage = pageNumber;
+        updatePagination();
+    }
+
+    function nextPage() {
+        if (currentPage < totalPages) {
+            currentPage++;
             updatePagination();
         }
+    }
 
-        function addArtikel() {
-            alert("Add Artikel functionality is yet to be implemented.");
+    function previousPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            updatePagination();
+        }
+    }
+
+    window.onload = updatePagination;
+
+// Save Artikel (Add or Edit)
+function saveArtikel() {
+    const judul = document.getElementById("judul").value;
+    const status = document.getElementById("status").value;
+    const gambar = document.getElementById("gambar").files[0]; // Get the image file
+    const tableBody = document.getElementById('artikel-table-body');
+
+    if (judul) {
+        // Create an object URL for the image (this can be used to temporarily store the image URL)
+        const gambarURL = gambar ? URL.createObjectURL(gambar) : '';
+
+        if (currentEditRow) {
+            // Update the existing row with the new data, without displaying the image
+            currentEditRow.cells[1].innerText = judul;
+            currentEditRow.cells[2].innerText = status;
+
+            // Store the image URL (it will not be displayed, but we keep the reference for later)
+            currentEditRow.imageURL = gambarURL;
+        } else {
+            // Add a new row to the table without displaying the image
+            const newRow = tableBody.insertRow();
+            const rowCount = tableBody.rows.length;
+
+            // Store the image URL as a property of the row (for later use)
+            newRow.imageURL = gambarURL;
+
+            newRow.innerHTML = `
+                <td>${rowCount}</td>
+                <td>${judul}</td>
+                <td>${status}</td>
+                <td class="action-buttons">
+                    <button onclick="editArtikel(this)">Edit</button>
+                    <button class="delete-btn" onclick="deleteArtikel(this)">Delete</button>
+                </td>
+            `;
         }
 
-function updatePagination() {
-    const paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = '';
-
-    let startPage = Math.max(1, currentPage - 1); // Show 1 page before current
-    let endPage = Math.min(totalPages, currentPage + 1); // Show 1 page after current
-
-    // Adjust so that we always show 3 pages (including the current page)
-    if (endPage - startPage < 2) {
-        startPage = Math.max(1, endPage - 2); // If there is not enough space on the left, adjust
-    }
-
-    if (currentPage > 1) {
-        paginationContainer.innerHTML += `<a href="#" class="pagination-arrow" onclick="previousPage()"><</a>`;
-    }
-
-    // Add page numbers within range (current page - 1, current page, current page + 1)
-    for (let i = startPage; i <= endPage; i++) {
-        paginationContainer.innerHTML += `<a href="#" class="page-number" onclick="changePage(${i})">${i}</a>`;
-    }
-
-    if (currentPage < totalPages) {
-        paginationContainer.innerHTML += `<a href="#" class="pagination-arrow" onclick="nextPage()">></a>`;
+        // Close the modal after saving
+        closeModal();
+    } else {
+        alert("Please fill out all fields.");
     }
 }
 
-function changePage(pageNumber) {
-    currentPage = pageNumber;
-    updatePagination();
+
+// Cancel button functionality
+function closeModal() {
+    document.getElementById("addArtikelModal").style.display = "none";
+    // Reset the modal form fields in case it was left open for editing
+    document.getElementById("judul").value = '';
+    document.getElementById("status").value = '';
+    document.getElementById("gambar").value = '';
+    document.getElementById("modal-title").textContent = "Add Artikel"; // Reset the title
 }
 
-function nextPage() {
-    if (currentPage < totalPages) {
-        currentPage++;
-        updatePagination();
+// Edit Artikel
+function editArtikel(button) {
+    document.getElementById("modal-title").textContent = "Edit Artikel";
+    const row = button.closest('tr');
+    currentEditRow = row;
+
+    document.getElementById("judul").value = row.cells[1].innerText;
+    document.getElementById("status").value = row.cells[2].innerText;
+    // Don't display the image in the input field as part of the form
+    document.getElementById("addArtikelModal").style.display = "block";
+}
+
+// Handle closing modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById("addArtikelModal");
+    if (event.target == modal) {
+        closeModal();
     }
 }
 
-function previousPage() {
-    if (currentPage > 1) {
-        currentPage--;
-        updatePagination();
-    }
+
+ // Delete Artikel
+function deleteArtikel(button) {
+    const row = button.closest('tr');
+    row.remove();
+
+    const tableBody = document.getElementById('artikel-table-body');
+    Array.from(tableBody.rows).forEach((row, index) => {
+        row.cells[0].innerText = index + 1; // Update row numbers
+    });
 }
 
-window.onload = updatePagination;
 
-        function saveArtikel() {
-            const judul = document.getElementById("judul").value;
-            const status = document.getElementById("status").value;
-
-            if (judul && status) {
-                const tableBody = document.getElementById('artikel-table-body');
-
-                if (currentEditRow) {
-                    currentEditRow.cells[1].innerText = judul;
-                    currentEditRow.cells[2].innerText = status;
-                } else {
-                    const newRow = tableBody.insertRow();
-                    const rowCount = tableBody.rows.length;
-
-                    newRow.innerHTML = `
-                        <td>${rowCount}</td>
-                        <td>${judul}</td>
-                        <td>${status}</td>
-                        <td class="action-buttons">
-                            <button onclick="editArtikel(this)">Edit</button>
-                            <button class="delete-btn" onclick="deleteArtikel(this)">Delete</button>
-                        </td>
-                    `;
-                }
-
-                closeModal();
-            } else {
-                alert("Please fill out all fields.");
-            }
+    // Handle closing modal when clicking outside of it
+    window.onclick = function(event) {
+        const modal = document.getElementById("addArtikelModal");
+        if (event.target == modal) {
+            closeModal();
         }
+    }
 
-        function editArtikel(button) {
-            document.getElementById("modal-title").textContent = "Edit Artikel";
-            const row = button.closest('tr');
-            currentEditRow = row;
-
-            document.getElementById("judul").value = row.cells[1].innerText;
-            document.getElementById("status").value = row.cells[2].innerText;
-
-            document.getElementById("addArtikelModal").style.display = "block";
-        }
-
-        function closeModal() {
-            document.getElementById("addArtikelModal").style.display = "none";
-        }
-
-        function deleteArtikel(button) {
-            const row = button.closest('tr');
-            row.remove();
-
-            const tableBody = document.getElementById('artikel-table-body');
-            Array.from(tableBody.rows).forEach((row, index) => {
-                row.cells[0].innerText = index + 1;
-            });
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById("addArtikelModal");
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        updatePagination();
-    </script>
+    // Modal structure and functionality
+    document.getElementById('addArtikelModal').innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Add Artikel</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <span style="font-weight: bold;">Judul</span>
+                    <input type="text" id="judul" placeholder="Enter Judul">
+                </div>
+                <div class="form-group">
+                    <span style="font-weight: bold;">Isi</span>
+                    <textarea id="isi" placeholder="Enter Isi" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <span style="font-weight: bold;">Gambar</span>
+                    <input type="file" id="gambar">
+                </div>
+                <input type="hidden" id="status" value="published"> <!-- Static status field -->
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="save-btn" onclick="saveArtikel()">Save</button>
+            </div>
+        </div>
+    `;
+</script>
 </body>
 
 </html>
