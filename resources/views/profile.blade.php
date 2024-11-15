@@ -289,6 +289,21 @@
             background-color: #f2f2f2;
         }
 
+        .text-box {
+        border: 1px solid #ccc;  /* Border around the box */
+        padding-top: 3px;             /*Space inside the box */
+        padding-left: 5px;
+         border-radius: 5px;       /* Rounded corners */
+         background-color: #f9f9f9; /* Light background color */
+         font-size: 16px;          /* Text size */
+         width: 80rem;             /* Width of the box */
+         height: 2rem;            /*  Allow the height to adjust based on content */
+         word-wrap: break-word;    /* Ensure long words break and don't overflow */
+
+}
+
+
+
     </style>
 </head>
 
@@ -318,15 +333,21 @@
                 <h2>Informasi Akun - Profile</h2>
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" placeholder="Username">
+                    <div class="text-box">
+                    This is a text box filled with words
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" placeholder="Email">
+                    <div class="text-box">
+                    This is a text box filled with words
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Number Phone</label>
-                    <input type="text" placeholder="Number Phone">
+                     <div class="text-box">
+                    This is a text box filled with words
+                    </div>
                 </div>
                 <button class="edit-profile-btn">Edit Profile</button>
             </div>
