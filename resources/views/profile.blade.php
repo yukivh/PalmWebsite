@@ -345,54 +345,43 @@
                             <th>Aksi</th>
                         </tr>
                     </thead>
+                    <tbody id="artikel-table-body">
+                        <!-- Rows will be added dynamically -->
+                    </tbody>
                 </table>
-                <div class="pagination" id="pagination">
-                    <a href="#" class="page-number" onclick="changePage(1)">1</a>
-                    <a href="#" class="page-number" onclick="changePage(2)">2</a>
-                    <a href="#" class="page-number" onclick="changePage(3)">3</a>
-                    <a href="#" class="page-number" onclick="changePage(4)">4</a>
-                    <a href="#" class="page-number" onclick="changePage(5)">5</a>
-                    <a href="#" class="page-number" onclick="changePage(6)">6</a>
-                    <a href="#" class="page-number" onclick="changePage(7)">7</a>
-                    <a href="#" class="page-number" onclick="changePage(8)">8</a>
-                    <a href="#" class="page-number" onclick="changePage(9)">9</a>
-                    <a href="#" class="page-number" onclick="changePage(10)">10</a>
-                    <a href="#" class="pagination-arrow" onclick="previousPage()"><</a>
-                    <a href="#" class="pagination-arrow" onclick="nextPage()">></a>
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Artikel Modal -->
+    <div id="addArtikelModal" class="modal">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 id="modal-title">Add Artikel</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Judul Field -->
+                <div class="form-group">
+                    <span id="judulText" style="display: block; font-weight: bold; margin-bottom: 5px;">Judul</span> <!-- Static text above input -->
+                    <input type="text" id="judul" placeholder="Enter Judul">
+                </div>
+                <!-- Status Field -->
+                <div class="form-group">
+                    <span id="statusText" style="display: block; font-weight: bold; margin-bottom: 5px;">Status</span> <!-- Static text above input -->
+                    <input type="text" id="status" placeholder="Enter Status">
                 </div>
             </div>
-        </div>
-    </div>
-
-<!-- Add/Edit Artikel Modal -->
-<div id="addArtikelModal" class="modal">
-    <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h2 id="modal-title">Add Artikel</h2>
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-        </div>
-        <!-- Modal Body -->
-        <div class="modal-body">
-            <!-- Judul Field -->
-            <div class="form-group">
-                <span id="judulText" style="display: block; font-weight: bold; margin-bottom: 5px;">Judul</span> <!-- Static text above input -->
-                <input type="text" id="judul" placeholder="Enter Judul">
-            </div>
-            <!-- Status Field -->
-            <div class="form-group">
-                <span id="statusText" style="display: block; font-weight: bold; margin-bottom: 5px;">Status</span> <!-- Static text above input -->
-                <input type="text" id="status" placeholder="Enter Status">
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="save-btn" onclick="saveArtikel()">Save</button>
             </div>
         </div>
-        <!-- Modal Footer -->
-        <div class="modal-footer">
-            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-            <button class="save-btn" onclick="saveArtikel()">Save</button>
-        </div>
     </div>
-</div>
-
 
     <!-- Footer Section -->
     <footer id="kontak">
@@ -414,6 +403,7 @@
 
     <script>
         let currentPage = 1;
+        const totalPages = 10; // Max 10 pages
 
         function showProfile() {
             document.getElementById('profile-section').style.display = 'block';
@@ -427,82 +417,76 @@
             document.getElementById('artikel-section').style.display = 'block';
             document.getElementById('profile-link').classList.remove('active');
             document.getElementById('artikel-link').classList.add('active');
+            updatePagination();
         }
 
         function addArtikel() {
             alert("Add Artikel functionality is yet to be implemented.");
         }
 
-        function changePage(pageNumber) {
-            currentPage = pageNumber;
-            updatePagination();
-        }
+function updatePagination() {
+    const paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';
 
-        function nextPage() {
-            if (currentPage < 10) {
-                currentPage++;
-                updatePagination();
-            }
-        }
+    let startPage = Math.max(1, currentPage - 1); // Show 1 page before current
+    let endPage = Math.min(totalPages, currentPage + 1); // Show 1 page after current
 
-        function previousPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                updatePagination();
-            }
-        }
+    // Adjust so that we always show 3 pages (including the current page)
+    if (endPage - startPage < 2) {
+        startPage = Math.max(1, endPage - 2); // If there is not enough space on the left, adjust
+    }
 
-        function updatePagination() {
-            let pageLinks = document.querySelectorAll('.page-number');
-            pageLinks.forEach(link => {
-                if (parseInt(link.innerText) === currentPage) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
+    if (currentPage > 1) {
+        paginationContainer.innerHTML += `<a href="#" class="pagination-arrow" onclick="previousPage()"><</a>`;
+    }
 
-let currentEditRow = null;
+    // Add page numbers within range (current page - 1, current page, current page + 1)
+    for (let i = startPage; i <= endPage; i++) {
+        paginationContainer.innerHTML += `<a href="#" class="page-number" onclick="changePage(${i})">${i}</a>`;
+    }
 
-        function addArtikel() {
-            document.getElementById("modal-title").textContent = "Add Artikel";
-            document.getElementById("judul").value = '';
-            document.getElementById("status").value = '';
-            currentEditRow = null;
-            document.getElementById("addArtikelModal").style.display = "block";
-        }
+    if (currentPage < totalPages) {
+        paginationContainer.innerHTML += `<a href="#" class="pagination-arrow" onclick="nextPage()">></a>`;
+    }
+}
 
-        function editArtikel(button) {
-            document.getElementById("modal-title").textContent = "Edit Artikel";
-            const row = button.parentNode.parentNode;
-            currentEditRow = row;
+function changePage(pageNumber) {
+    currentPage = pageNumber;
+    updatePagination();
+}
 
-            document.getElementById("judul").value = row.cells[1].innerText;
-            document.getElementById("status").value = row.cells[2].innerText;
-            document.getElementById("addArtikelModal").style.display = "block";
-        }
+function nextPage() {
+    if (currentPage < totalPages) {
+        currentPage++;
+        updatePagination();
+    }
+}
 
-        function closeModal() {
-            document.getElementById("addArtikelModal").style.display = "none";
-        }
+function previousPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        updatePagination();
+    }
+}
+
+window.onload = updatePagination;
 
         function saveArtikel() {
             const judul = document.getElementById("judul").value;
             const status = document.getElementById("status").value;
 
             if (judul && status) {
+                const tableBody = document.getElementById('artikel-table-body');
+
                 if (currentEditRow) {
                     currentEditRow.cells[1].innerText = judul;
                     currentEditRow.cells[2].innerText = status;
                 } else {
-                    const table = document.querySelector(".table tbody") || document.createElement('tbody');
-                    if (!table.parentNode) document.querySelector(".table").appendChild(table);
+                    const newRow = tableBody.insertRow();
+                    const rowCount = tableBody.rows.length;
 
-                    const row = document.createElement("tr");
-
-                    row.innerHTML = `
-                        <td>${table.rows.length + 1}</td>
+                    newRow.innerHTML = `
+                        <td>${rowCount}</td>
                         <td>${judul}</td>
                         <td>${status}</td>
                         <td class="action-buttons">
@@ -510,8 +494,6 @@ let currentEditRow = null;
                             <button class="delete-btn" onclick="deleteArtikel(this)">Delete</button>
                         </td>
                     `;
-
-                    table.appendChild(row);
                 }
 
                 closeModal();
@@ -520,11 +502,27 @@ let currentEditRow = null;
             }
         }
 
-        function deleteArtikel(button) {
-            const row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
+        function editArtikel(button) {
+            document.getElementById("modal-title").textContent = "Edit Artikel";
+            const row = button.closest('tr');
+            currentEditRow = row;
 
-            document.querySelectorAll(".table tbody tr").forEach((row, index) => {
+            document.getElementById("judul").value = row.cells[1].innerText;
+            document.getElementById("status").value = row.cells[2].innerText;
+
+            document.getElementById("addArtikelModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("addArtikelModal").style.display = "none";
+        }
+
+        function deleteArtikel(button) {
+            const row = button.closest('tr');
+            row.remove();
+
+            const tableBody = document.getElementById('artikel-table-body');
+            Array.from(tableBody.rows).forEach((row, index) => {
                 row.cells[0].innerText = index + 1;
             });
         }
@@ -535,6 +533,9 @@ let currentEditRow = null;
                 closeModal();
             }
         }
+
+        updatePagination();
     </script>
 </body>
+
 </html>
