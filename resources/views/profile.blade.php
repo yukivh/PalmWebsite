@@ -200,7 +200,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-            max-width: 500px;
+            max-width: 1500px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
@@ -238,6 +238,24 @@
         .cancel-btn {
             background-color: #d9534f;
             color: white;
+        }
+
+        .modal-body input[type="text"],
+        .modal-body textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .modal-body input[type="file"] {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 0.5rem;
         }
 
         /* Footer */
@@ -404,7 +422,7 @@
             </div>
             <div class="form-group">
                 <span style="font-weight: bold;">Isi</span>
-                <input type="text" id="status" placeholder="Enter Status">
+                <input type="text" id="status" placeholder="Enter Status" style="padding-bottom: 30rem;">
             </div>
             <!-- Image Field (Optional) -->
             <div class="form-group">
