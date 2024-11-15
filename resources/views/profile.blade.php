@@ -289,18 +289,32 @@
             background-color: #f2f2f2;
         }
 
-        .text-box {
-        border: 1px solid #ccc;  /* Border around the box */
-        padding-top: 3px;             /*Space inside the box */
-        padding-left: 5px;
-         border-radius: 5px;       /* Rounded corners */
-         background-color: #f9f9f9; /* Light background color */
-         font-size: 16px;          /* Text size */
-         width: 80rem;             /* Width of the box */
-         height: 2rem;            /*  Allow the height to adjust based on content */
-         word-wrap: break-word;    /* Ensure long words break and don't overflow */
-
+/* .text-box style updated to be more responsive */
+.text-box {
+    border: 1px solid #ccc; /* Border around the box */
+    padding: 5px; /* Space inside the box */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    font-size: 16px; /* Text size */
+    width: 100%; /* Let the text box take full available width */
+    min-height: 2rem; /* Ensure it grows with content */
+    word-wrap: break-word; /* Ensure long words break and don't overflow */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
+
+
+
+/* Add responsiveness for mobile view */
+@media screen and (max-width: 768px) {
+    .content {
+        flex-direction: column; /* Stack sidebar and content vertically */
+    }
+
+    .content-area {
+        width: 100%; /* Ensure full width for content area */
+    }
+}
+
 
 
 
