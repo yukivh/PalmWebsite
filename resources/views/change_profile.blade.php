@@ -145,7 +145,7 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="change_profile">
         <div class="logo">Palm On</div>
         <nav>
             <a href="{{ route('home') }}#home">Beranda</a>

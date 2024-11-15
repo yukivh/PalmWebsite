@@ -48,4 +48,8 @@ Route::get('/howartikel', function () {
     return view('howartikel');
 })->name('howartikel');
 
+// In route change profile
+Route::get('/change_profile', function () {
+    return view('change_profile');
+})->name('change_profile');
 

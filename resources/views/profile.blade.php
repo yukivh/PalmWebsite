@@ -381,7 +381,9 @@
                     This is a text box filled with words
                     </div>
                 </div>
+                <a href="{{ route('change_profile') }}#change_profile">
                 <button class="edit-profile-btn">Edit Profile</button>
+                </a>
             </div>
 
             <div class="content-area" id="artikel-section" style="display: none;">
