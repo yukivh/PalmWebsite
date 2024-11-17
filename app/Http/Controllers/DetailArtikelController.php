@@ -18,10 +18,8 @@ class DetailArtikelController extends Controller
                 // Mengambil data artikel dalam format JSON
                 $artikel = $response->json();
 
-                // Membuat URL gambar
-                $base_url = "http://127.0.0.1:8001/";
-                $artikel['gambar_url'] = $base_url . $artikel['gambar'];
 
+                $artikel['gambar_url'] = $artikel['gambar'];              
                 // Mengirim data artikel ke view
                 return view('isi_artikel', ['artikel' => $artikel]);
             } else {

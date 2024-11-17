@@ -1,7 +1,5 @@
 <?php
 
-// ArtikelController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
@@ -14,14 +12,18 @@ class ArtikelController extends Controller
         try {
             // Mengambil data artikel dari API eksternal
             $response = Http::get('http://127.0.0.1:8001/api/artikel');
-            $base_url = "http://127.0.0.1:8001/";
+            
             // Mengecek apakah request berhasil
             if ($response->successful()) {
                 // Mengambil data artikel dalam format JSON
                 $artikels = $response->json();
+
                 foreach ($artikels as &$artikel) {
-                    $artikel['gambar_url'] = $base_url. $artikel['gambar'];
+                    if (isset($artikel['gambar']) && !empty($artikel['gambar'])) {
+                        $artikel['gambar_url'] = $artikel['gambar'];
+                    } 
                 }
+
                 // Mengirim data artikel ke view
                 return view('artikel', ['artikels' => $artikels]);
             } else {
@@ -34,4 +36,3 @@ class ArtikelController extends Controller
         }
     }
 }
-
