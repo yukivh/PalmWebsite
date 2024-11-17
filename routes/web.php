@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\DetailArtikelController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,9 +26,11 @@ Route::get('/home', function () {
 })->name('home');
 
 // In routes artikel
-Route::get('/artikel', function () {
-    return view('artikel');
-})->name('artikel');
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
+
+// Route untuk menampilkan halaman detail artikel
+Route::get('/artikel/{id}', [DetailArtikelController::class, 'show'])->name('isi_artikel');
+
 
 // In routes login
 Route::get('/login', function () {
