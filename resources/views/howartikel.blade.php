@@ -95,14 +95,18 @@
             background-color: #012522;
             color: white;
             padding: 2rem 5%;
+            height: 65vh;
+            margin-top: 500px;
         }
 
         .footer-logo img {
             width: 100px;
+            margin-top: 100px;
         }
 
         .footer-links h3, .footer-contact h3 {
             margin-bottom: 1rem;
+            margin-top: 100px;
         }
 
         .footer-links a, .footer-contact p {
@@ -127,16 +131,17 @@
             <a href="{{ route('artikel')}}#artikel">Artikel</a>
             <a href="#kontak">Kontak</a>
         </nav>
-        <a href="{{ route('login')}}">
+        <!--<a href="{{ route('login')}}">
         <button class="login-btn">Login</button>
-        </a>
+        </a>-->
     </header>
 
     <!-- Instructions Section -->
     <div class="container">
         <div class="instructions">
             <h1>Cara Publish Artikel</h1>
-            <ol>
+            <h4>Maaf ya, fitur ini sedang dikembangkan oleh developer</h4>
+            <!--<ol>
                 <li>Pergi ke menu login -> daftar sekarang, pada halaman sign in pilih kategori pakar.</li>
                 <li>Selanjutnya lakukan registrasi pada halaman sign in dan isi data yang diperlukan pada form.</li>
                 <li>Tunggu sampai akun anda terverifikasi.</li>
@@ -144,7 +149,7 @@
                 <li>Pada halaman account masuk ke opsi my artikel, pada halaman ini akan terlihat status artikel yang telah anda submit, klik icon tanda tambah untuk membuat artikel.</li>
                 <li>Isi form artikel dengan lengkap dan klik request publish.</li>
                 <li>Admin akan mengecek dan meng-accept artikel kamu agar bisa muncul pada halaman artikel website maupun mobile.</li>
-            </ol>
+            </ol>-->
         </div>
     </div>
 
