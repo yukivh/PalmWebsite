@@ -188,7 +188,7 @@
         .feature-card {
             background-color: #4F9369;
             color: white;
-            padding-top: 5rem;
+            padding-top: 3rem;
             padding-bottom: 3rem;
             padding-left: 0rem;
             padding-right: 0rem;
@@ -285,10 +285,10 @@
             <a href="{{ route('home') }}#home">Beranda</a>
             <a href="{{ route('artikel')}}#artikel">Artikel</a>
             <a href="#kontak">Kontak</a>
+            <!--<a href="{{ route('login') }}">
+            <button class="login-btn">Login</button>
+            </a>-->
         </nav>
-        <a href="{{ route('login')}}">
-        <button class="login-btn">Login</button>
-        </a>
     </header>
 
     <!-- Hero Section -->
@@ -298,8 +298,7 @@
             <img src="{{ asset("/assets/Group 5 2.png") }}" alt="Palm On Logo">
             <p>Kebutuhan Kebun Sawitmu akan terpenuhi dengan satu aplikasi !!</p>
             <a href="{{ url("#") }}" class="play-store-btn">
-                <img src="{{ asset("/assets/game.png") }}" alt="Google Play Icon">
-                <span>Android App On<br>Google Play Store</span>
+                <span>Donwload Now</span>
             </a>
         </div>
     </section>
@@ -322,20 +321,24 @@
         <div class="spacer"></div>
         <div class="feature-cards">
             <div class="feature-card">
+                <img src="{{asset("/assets/icon_kalkulasi.png")}}" style="width: 80px; height:100px; margin-bottom:20px;" alt="icon_kalkulasi">
                 <h3>Kalkulasi</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p style="padding: 5px;">Fitur ini dapat membantu kamu dalam menghitung laba pendapatan dari hasil kebunmu dalam satu kali klik !!</p>
             </div>
             <div class="feature-card">
+                <img src="{{asset("/assets/icon_simulasi.png")}}" style="width: 100px; height:100px; margin-bottom:20px;" alt="icon_simulasi">
                 <h3>Simulasi Lahan</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p style="padding: 5px;">Bantu kamu dalam menentukan lahan yang layak untuk kebun sawitmu</p>
             </div>
             <div class="feature-card">
+                <img src="{{asset("/assets/icon_guide.png")}}" style="width: 80px; height:100px; margin-bottom:20px;" alt="icon_guide">
                 <h3>Guide</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p style="padding: 5px;">Kumpulan panduan untuk kamu yang masih bingung dalam mengelola kebun sawit</p>
             </div>
             <div class="feature-card">
+                <img src="{{asset("/assets/icon_artikel.png")}}" style="width: 80px; height:100px; margin-bottom:20px;" alt="icon_artikel">
                 <h3>Artikel</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p style="padding: 5px;">Kumpulan artikel yang dapat menambah pengetahuan kamu seputar kebun sawit</p>
             </div>
         </div>
     </section>

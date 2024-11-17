@@ -6,7 +6,7 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DetailArtikelController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 
 Route::get('/artikel', [UserController::class, 'showArtikel']);

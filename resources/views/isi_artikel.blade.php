@@ -116,9 +116,9 @@
             <a href="{{ route('artikel') }}#artikel">Artikel</a>
             <a href="#kontak">Kontak</a>
         </nav>
-        <a href="{{ route('login') }}">
+        <!--<a href="{{ route('login') }}">
             <button class="login-btn">Login</button>
-        </a>
+        </a>-->
     </header>
 
     <!-- Gradient Header with Title -->

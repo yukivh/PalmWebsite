@@ -79,7 +79,7 @@
         /* Articles grid styling */
         .article-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, 300px);
+            grid-template-columns: repeat(auto-fit, 335px);
             gap: 20px;
             margin-top: 30px;
         }
@@ -91,7 +91,7 @@
             border-radius: 10px;
             padding: 1rem;
             text-align: center;
-            width: 300px;
+            width: 335px;
             height: auto;
             text-decoration: none;
         }
@@ -158,8 +158,10 @@
             <a href="{{ route('home') }}#home">Beranda</a>
             <a href="{{ route('artikel') }}#artikel">Artikel</a>
             <a href="#kontak">Kontak</a>
+            <!--<a href="{{ route('login') }}">
+            <button class="login-btn">Login</button>
+            </a>-->
         </nav>
-        <a href="{{ route('login') }}"><button class="login-btn">Login</button></a>
     </header>
 
     <!-- Main Container -->
