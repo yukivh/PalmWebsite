@@ -145,21 +145,25 @@
         .about .text h2 {
             font-size: 2rem;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .about .text p {
             font-size: 1.25rem;
             margin-bottom: 1rem;
+            text-align: center;
+            
         }
 
         .about .app-image {
-            flex: 1;
+            
         }
 
         .about .app-image img {
             width: 100%;
             max-width: 400px;
             border-radius: 10px;
+            margin-left: 20px;
         }
 
         /* Features Section */
@@ -201,6 +205,8 @@
             color: #fff;
             text-align: center;
             position: relative;
+            margin-bottom: 200px;
+            margin-top: 200px;
         }
 
         .article-overlay {
@@ -245,14 +251,17 @@
             background-color: #012522;
             color: white;
             padding: 2rem 5%;
+            height: 65vh;
         }
 
         .footer-logo img {
             width: 100px;
+            margin-top: 100px;
         }
 
         .footer-links h3, .footer-contact h3 {
             margin-bottom: 1rem;
+            margin-top: 100px;
         }
 
         .footer-links a, .footer-contact p {
@@ -287,7 +296,6 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <img src="{{ asset("/assets/Group 5 2.png") }}" alt="Palm On Logo">
-            <h1 style="color: #F09621">Palm On</h1>
             <p>Kebutuhan Kebun Sawitmu akan terpenuhi dengan satu aplikasi !!</p>
             <a href="{{ url("#") }}" class="play-store-btn">
                 <img src="{{ asset("/assets/game.png") }}" alt="Google Play Icon">
@@ -299,7 +307,7 @@
     <!-- About Section -->
     <section class="about">
         <div class="text">
-            <h2 style="margin-left: 12rem">Palm On</h2>
+            <h2 style=" align-items:center">Palm On</h2>
             <p>Palm On adalah aplikasi yang dirancang untuk memenuhi segala kebutuhan dalam pengelolaan kebun sawit Anda. Dari kalkulasi hingga simulasi lahan, kami memiliki semuanya dalam satu aplikasi!</p>
         </div>
         <div class="app-image">

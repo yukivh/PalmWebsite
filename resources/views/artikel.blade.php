@@ -79,8 +79,9 @@
         /* Articles grid styling */
         .article-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, 300px);
+            gap: 20px;
+            margin-top: 30px;
         }
 
         /* Individual article card styling */
@@ -90,6 +91,9 @@
             border-radius: 10px;
             padding: 1rem;
             text-align: center;
+            width: 300px;
+            height: auto;
+            text-decoration: none;
         }
 
         .article-card img {
@@ -111,22 +115,26 @@
             margin-bottom: 0.5rem;
         }
 
-                /* Footer */
-                footer {
+        /* Footer */
+        footer {
             display: flex;
             justify-content: space-around;
             align-items: start;
             background-color: #012522;
             color: white;
             padding: 2rem 5%;
+            height: 65vh;
+            margin-top: 300px;
         }
 
         .footer-logo img {
             width: 100px;
+            margin-top: 100px;
         }
 
         .footer-links h3, .footer-contact h3 {
             margin-bottom: 1rem;
+            margin-top: 100px;  
         }
 
         .footer-links a, .footer-contact p {
@@ -148,12 +156,10 @@
         <div class="logo">Palm On</div>
         <nav>
             <a href="{{ route('home') }}#home">Beranda</a>
-            <a href="{{ route('artikel')}}#artikel">Artikel</a>
+            <a href="{{ route('artikel') }}#artikel">Artikel</a>
             <a href="#kontak">Kontak</a>
         </nav>
-        <a href="{{ route('login')}}">
-        <button class="login-btn">Login</button>
-        </a>
+        <a href="{{ route('login') }}"><button class="login-btn">Login</button></a>
     </header>
 
     <!-- Main Container -->
@@ -161,51 +167,18 @@
         <!-- Page Title -->
         <h1>Kumpulan Artikel</h1>
         <hr>
-        
-        <!-- Search Bar -->
-        <input type="text" class="search-bar" placeholder="Search...">
 
         <!-- Articles Grid -->
         <div class="article-grid">
-
-            <!-- Article Card -->
-            <div class="article-card">
-                <img src="{{ asset("/Artikel(1).png") }}" alt="Cara Menanam Sawit"> <!-- Update image path here -->
-                <h3>Cara Menanam Sawit</h3> <!-- Update article title here -->
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu quam eget neque viverra porta...</p> <!-- Update article description here -->
-            </div>
-
-            <!-- Duplicate Article Cards -->
-            <div class="article-card">
-                <img src="{{ asset("/Artikel(1).png") }}" alt="Cara Menanam Sawit">
-                <h3>Cara Menanam Sawit</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu quam eget neque viverra porta...</p>
-            </div>
-
-            <div class="article-card">
-                <img src="{{ asset("/Artikel(1).png") }}" alt="Cara Menanam Sawit">
-                <h3>Cara Menanam Sawit</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu quam eget neque viverra porta...</p>
-            </div>
-
-            <div class="article-card">
-                <img src="{{ asset("/Artikel(1).png") }}" alt="Cara Menanam Sawit">
-                <h3>Cara Menanam Sawit</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu quam eget neque viverra porta...</p>
-            </div>
-
-            <div class="article-card">
-                <img src="{{ asset("/Artikel(1).png") }}" alt="Cara Menanam Sawit">
-                <h3>Cara Menanam Sawit</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu quam eget neque viverra porta...</p>
-            </div>
-
-            <div class="article-card">
-                <img src="{{ asset("/Artikel(1).png") }}" alt="Cara Menanam Sawit">
-                <h3>Cara Menanam Sawit</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu quam eget neque viverra porta...</p>
-            </div>
-
+            <!-- Loop through artikel data -->
+            @foreach ($artikels as $artikel)
+                <a href="{{ route('isi_artikel', $artikel['id']) }}" class="article-card">
+                    <img src="{{ $artikel['gambar_url'] }}" alt="{{ $artikel['judul'] }}">
+                    <h3>{{ $artikel['judul'] }}</h3>
+                    <p>{{ Str::limit($artikel['isi'], 100) }}...</p>
+                    <p><small>Oleh: {{ $artikel['nama_pembuat'] }}</small></p>
+                </a>
+            @endforeach
         </div>
     </div>
 
@@ -229,4 +202,3 @@
 
 </body>
 </html>
-
